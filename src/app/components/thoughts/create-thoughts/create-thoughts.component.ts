@@ -17,10 +17,6 @@ export class CreateThoughtsComponent implements OnInit {
     e.preventDefault();
     console.log(this.thought);
   }
-  public cancelThought(e: Event) {
-    e.preventDefault();
-    console.log('cancel');
-  }
 
   ngOnInit(): void {}
 }

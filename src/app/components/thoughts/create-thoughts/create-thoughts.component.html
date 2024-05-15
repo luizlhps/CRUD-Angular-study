@@ -31,6 +31,7 @@
         <label for="modelo1">
           <input
             id="modelo1"
+            value="modelo1"
             type="radio"
             name="modelo-card"
             [(ngModel)]="thought.modelo"
@@ -94,7 +95,7 @@
     </div>
     <div class="acoes">
       <button (click)="createThought($event)" class="botao">Salver</button>
-      <button (click)="cancelThought($event)" class="botao">Cancelar</button>
+      <button routerLink="/" class="botao">Cancelar</button>
     </div>
   </form>
 </section>
