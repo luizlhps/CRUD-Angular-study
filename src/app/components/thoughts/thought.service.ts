@@ -28,4 +28,9 @@ export class ThoughtService {
     const url = `${this.Api}/${id}`;
     return this.http.get<Thought>(url);
   }
+
+  update(data: Thought): Observable<Thought> {
+    const url = `${this.Api}/${data.id}`;
+    return this.http.put<Thought>(url, data);
+  }
 }

@@ -8,7 +8,7 @@
     <b>{{ thought.autoria }}</b>
   </p>
   <div class="acoes">
-    <button class="botao-editar">
+    <button class="botao-editar" routerLink="update-thought/{{ thought.id }}">
       <img src="/assets/imgs/icone-editar.png" alt="Ícone de editar" />
     </button>
     <button class="botao-excluir" routerLink="delete-thought/{{ thought.id }}">

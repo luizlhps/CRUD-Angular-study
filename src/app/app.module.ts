@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ListThoughtsComponent } from './components/thoughts/list-thoughts/list-thoughts.component';
 import { ThoughtComponent } from './components/thoughts/thought/thought.component';
 import { DeleteThoughtComponent } from './components/thoughts/delete-thought/delete-thought.component';
+import { UpdateThoughtComponent } from './update-thought/update-thought.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DeleteThoughtComponent } from './components/thoughts/delete-thought/del
     ListThoughtsComponent,
     ThoughtComponent,
     DeleteThoughtComponent,
+    UpdateThoughtComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
