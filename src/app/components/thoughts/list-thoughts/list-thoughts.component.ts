@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RootThought, Thought } from '../interface/thought';
+import { Thought } from '../interface/thought';
+import { ThoughtService } from '../thought.service';
 
 @Component({
   selector: 'app-list-thoughts',
@@ -7,19 +8,14 @@ import { RootThought, Thought } from '../interface/thought';
   styleUrls: ['./list-thoughts.component.scss'],
 })
 export class ListThoughtsComponent implements OnInit {
-  listThoughts: Thought[] = [
-    {
-      id: 1,
-      conteudo: 'Conteudo do zero ',
-      autoria: 'joão zero',
-      modelo: 'modelo1',
-    },
-    {
-      id: 2,
-      conteudo: 'Conteudo do x ',
-      autoria: 'joão x',
-      modelo: 'modelo1',
-    },
-  ];
-  ngOnInit(): void {}
+  listThoughts: Thought[] = [];
+
+  constructor(private service: ThoughtService) {}
+  ngOnInit(): void {
+    this.service.getAll().subscribe((thoughtList) => {
+      console.log(thoughtList);
+
+      this.listThoughts = thoughtList;
+    });
+  }
 }
