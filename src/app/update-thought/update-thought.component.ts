@@ -1,26 +1,41 @@
 import { Component } from '@angular/core';
 import { ThoughtService } from '../components/thoughts/thought.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Thought } from '../components/thoughts/interface/thought';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-update-thought',
   templateUrl: './update-thought.component.html',
   styleUrls: ['./update-thought.component.scss'],
 })
 export class UpdateThoughtComponent {
-  thought: Thought = {
-    id: 0,
-    conteudo: '',
-    autoria: '',
-    modelo: '',
-  };
+  form: FormGroup;
 
   constructor(
     private service: ThoughtService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {
+    this.form = this.formBuilder.group({
+      id: [null],
+      conteudo: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/(.|\s)*\S(.|\s)*/),
+        ]),
+      ],
+      autoria: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/(.|\s)*\S(.|\s)*/),
+        ]),
+      ],
+      modelo: ['modelo1'],
+    });
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -33,16 +48,22 @@ export class UpdateThoughtComponent {
 
     this.service
       .findById(idNumber)
-      .subscribe((thought) => (this.thought = thought));
+      .subscribe((thought) => this.form.patchValue(thought));
   }
 
   updateThought() {
-    this.service.update(this.thought).subscribe(() => {
-      this.router.navigate(['/']);
-    });
+    this.form.markAllAsTouched;
+    if (this.form.valid) {
+      this.service.update(this.form.value).subscribe(() => {
+        this.router.navigate(['/']);
+      });
+    }
   }
 
-  cancel() {
-    this.router.navigate(['/']);
+  verifiedForm() {
+    if (this.form.valid) {
+      return 'botao';
+    }
+    return 'botao__desabilitado';
   }
 }

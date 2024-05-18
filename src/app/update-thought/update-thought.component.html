@@ -2,35 +2,54 @@
   <header class="header">
     <h2>Adicione um <br />pensamento novo:</h2>
   </header>
-  <form>
+  <form [formGroup]="form">
     <label for="pensamento">Pensamento</label>
     <input
+      formControlName="conteudo"
       type="textarea"
       class="input"
       id="pensamento"
-      name="pensamento"
       placeholder="Digite o pensamento"
-      [(ngModel)]="thought.conteudo"
     />
+
+    <div
+      class="mensagem__erro"
+      *ngIf="form.get('conteudo')?.errors && form.get('conteudo')?.touched"
+    >
+      Conteudo é obrigátorio
+    </div>
+
     <label for="autoria">Autoria ou fonte</label>
     <input
+      formControlName="autoria"
       type="text"
       class="input"
       id="autoria"
-      name="autoria"
+      formControlName="autoria"
       placeholder="Digite a autoria ou fonte"
-      [(ngModel)]="thought.autoria"
     />
+
+    <div
+      class="mensagem__erro"
+      *ngIf="form.get('autoria')?.errors?.['required'] && form.get('autoria')?.touched "
+    >
+      Autoria é obrigatório!
+    </div>
+    <div
+      class="mensagem__erro"
+      *ngIf="form.get('autoria')?.errors?.['minLength'] && form.get('autoria')?.touched"
+    >
+      Autoria precisa no minimo 3 letras
+    </div>
     <label for="modelo">Selecione o modelo do card:</label>
     <div class="container-radio">
       <div class="radio-modelo">
         <label for="modelo1">
           <input
+            formControlName="modelo"
             type="radio"
             id="modelo1"
             value="modelo1"
-            name="modelo-card"
-            [(ngModel)]="thought.modelo"
           />
           <div class="custom-radio">
             <span></span>
@@ -40,9 +59,9 @@
         Prévia:
         <div class="modelo modelo1 ff-roboto-mono">
           <img src="../../../../assets/imgs/modelo1.png" alt="Aspas azuis" />
-          <p class="conteudo">{{ thought.conteudo }}</p>
+          <p class="conteudo">{{ form.get("conteudo")?.value }}</p>
           <p class="autoria">
-            <b>{{ thought.autoria }}</b>
+            <b>{{ form.get("autoria")?.value }}</b>
           </p>
         </div>
       </div>
@@ -50,11 +69,10 @@
       <div class="radio-modelo">
         <label for="modelo2">
           <input
+            formControlName="modelo"
             type="radio"
             id="modelo2"
             value="modelo2"
-            name="modelo-card"
-            [(ngModel)]="thought.modelo"
           />
           <div class="custom-radio">
             <span></span>
@@ -67,9 +85,9 @@
             src="../../../../assets/imgs/modelo2.png"
             alt="Aspas azul claro"
           />
-          <p class="conteudo">{{ thought.conteudo }}</p>
+          <p class="conteudo">{{ form.get("conteudo")?.value }}</p>
           <p class="autoria">
-            <b>{{ thought.autoria }}</b>
+            <b>{{ form.get("autoria")?.value }}</b>
           </p>
         </div>
       </div>
@@ -77,11 +95,10 @@
       <div class="radio-modelo">
         <label for="modelo3">
           <input
+            formControlName="modelo"
             type="radio"
             id="modelo3"
             value="modelo3"
-            name="modelo-card"
-            [(ngModel)]="thought.modelo"
           />
           <div class="custom-radio">
             <span></span>
@@ -91,16 +108,22 @@
         Prévia:
         <div class="modelo modelo3 ff-roboto-mono">
           <img src="../../../../assets/imgs/modelo3.png" alt="Aspas verdes" />
-          <p class="conteudo">{{ thought.conteudo }}</p>
+          <p class="conteudo">{{ form.get("conteudo")?.value }}</p>
           <p class="autoria">
-            <b>{{ thought.autoria }}</b>
+            <b>{{ form.get("autoria")?.value }}</b>
           </p>
         </div>
       </div>
     </div>
     <div class="acoes">
-      <button (click)="updateThought()" class="botao">Salvar</button>
-      <button (click)="cancel()" class="botao">Cancelar</button>
+      <button
+        [disabled]="!form.valid"
+        [ngClass]="verifiedForm()"
+        (click)="updateThought()"
+      >
+        Salvar
+      </button>
+      <button routerLink="/" class="botao">Cancelar</button>
     </div>
   </form>
 </section>
