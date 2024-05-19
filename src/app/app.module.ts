@@ -11,6 +11,7 @@ import { ListThoughtsComponent } from './components/thoughts/list-thoughts/list-
 import { ThoughtComponent } from './components/thoughts/thought/thought.component';
 import { DeleteThoughtComponent } from './components/thoughts/delete-thought/delete-thought.component';
 import { UpdateThoughtComponent } from './update-thought/update-thought.component';
+import { CarryComponent } from './components/thoughts/list-thoughts/carry/carry.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UpdateThoughtComponent } from './update-thought/update-thought.componen
     ThoughtComponent,
     DeleteThoughtComponent,
     UpdateThoughtComponent,
+    CarryComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

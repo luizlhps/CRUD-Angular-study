@@ -1,5 +1,16 @@
 <section class="container">
   <header class="header d-flex">
+    <div class="buscar-pensamentos">
+      <input
+        type="search"
+        placeholder="O que você procura"
+        autofocus
+        class="filtro"
+        [(ngModel)]="filter"
+        (keyup)="searchThought()"
+      />
+      <img src="/assets/imgs/lupa.png" alt="lupa azul" />
+    </div>
     <h2 class="ff-inter">Meu Mural</h2>
     <button routerLink="/create-thought" class="botao">
       Adicionar pensamento
@@ -11,6 +22,10 @@
     </div>
   </div>
 </section>
+<app-carry
+  (click)="carryMoreItems()"
+  [haveMoreItens]="haveMoreItens"
+></app-carry>
 
 <ng-template #semPensamentos>
   <div class="ff-inter sem-pensamentos">
