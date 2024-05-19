@@ -53,6 +53,7 @@ export class CreateThoughtsComponent implements OnInit {
         ]),
       ],
       modelo: ['modelo1'],
+      favorito: [false],
     });
   }
 }

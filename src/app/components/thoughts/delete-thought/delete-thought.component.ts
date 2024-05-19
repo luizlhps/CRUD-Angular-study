@@ -16,6 +16,7 @@ export class DeleteThoughtComponent {
     conteudo: '',
     autoria: '',
     modelo: '',
+    favorito: false,
   };
 
   constructor(

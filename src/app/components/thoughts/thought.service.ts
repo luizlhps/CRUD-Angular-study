@@ -11,12 +11,20 @@ export class ThoughtService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(page: number, filter: string): Observable<Thought[]> {
+  getAll(
+    page: number,
+    filter: string,
+    favorites: boolean
+  ): Observable<Thought[]> {
     const itemsPerPage = 6;
 
     let params = new HttpParams()
       .set('_page', page)
       .set('_limit', itemsPerPage);
+
+    if (favorites) {
+      params = params.set('favorito', favorites);
+    }
 
     if (filter.trim().length > 2) {
       console.log(filter.trim().length);
@@ -42,7 +50,15 @@ export class ThoughtService {
   }
 
   update(data: Thought): Observable<Thought> {
+    console.log('exec:', data);
+
     const url = `${this.Api}/${data.id}`;
     return this.http.put<Thought>(url, data);
+  }
+  updateFavorite(data: Thought): Observable<Thought> {
+    data.favorito = !data.favorito;
+
+    const url = `${this.Api}/${data.id}`;
+    return this.http.patch<Thought>(url, data);
   }
 }

@@ -34,6 +34,7 @@ export class UpdateThoughtComponent {
         ]),
       ],
       modelo: ['modelo1'],
+      favorito: [false],
     });
   }
 
